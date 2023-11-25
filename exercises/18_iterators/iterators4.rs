@@ -3,7 +3,38 @@
 // Execute `rustlings hint iterators4` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
+// COME BACK TO THIS IN THE FUTURE
+
+
+struct Factorial {
+    last: u64,
+    n: u64,
+}
+
+impl Factorial {
+    fn new() -> Self {
+        Self {
+            last: 1,
+            n: 0
+        }
+    }
+}
+
+impl Iterator for Factorial {
+    type Item = u64;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.n == 0 || self.n == 1 {
+            self.last = 1;
+        } else {
+            self.last = self.n * self.last;
+        }
+
+        self.n += 1;
+
+        Some(self.last)
+    }
+}
 
 pub fn factorial(num: u64) -> u64 {
     // Complete this function to return the factorial of num
@@ -14,6 +45,21 @@ pub fn factorial(num: u64) -> u64 {
     // - additional variables
     // For an extra challenge, don't use:
     // - recursion
+    // Concise iterator style
+    (1..=num).product()
+    // Iterator style:
+    // *Factorial::new()
+    //     .skip(num as usize)
+    //     .take(1)
+    //     .collect::<Vec<u64>>()
+    //     .first()
+    //     .unwrap()
+    // Recursive style:
+    // if num == 0 {
+    //     1
+    // } else if num > 0 {
+    //     factorial(num-1) * num
+    // } 
     // Execute `rustlings hint iterators4` for hints.
 }
 

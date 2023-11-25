@@ -17,6 +17,7 @@
 
         cargoBuildInputs = with pkgs; lib.optionals stdenv.isDarwin [
           darwin.apple_sdk.frameworks.CoreServices
+          libiconv
         ];
 
         rustlings =
@@ -25,7 +26,7 @@
             version = "5.6.1";
 
             buildInputs = cargoBuildInputs;
-            nativeBuildInputs = [pkgs.git];
+            nativeBuildInputs = [pkgs.git pkgs.libiconv];
 
             src = with pkgs.lib; cleanSourceWith {
               src = self;
